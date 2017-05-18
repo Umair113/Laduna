@@ -329,7 +329,7 @@ class OssnDatabase extends OssnBase {
 						$limitto   = $page_limit;
 						
             /*$data_limit = "{$limitfrom}, {$limitto}";*/
-						$data_limit = "{$limitfrom} OFFSET {$limitto}";
+						$data_limit = "{$limitto} OFFSET {$limitfrom}";
 						if($offset > 1) {
 								if($limit > $limitfrom) {
 										$limitto = $limit - $limitfrom;
