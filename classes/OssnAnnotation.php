@@ -193,6 +193,10 @@ class OssnAnnotation extends OssnEntities {
 				$params['order_by']     = $this->order_by;
 				$params['limit']        = $this->limit;
 				$params['page_limit']   = $this->page_limit;
+
+        /* added PostgreSQL fork */
+        
+        $params['group_by'] = 'a.id';
 				
 				return $this->searchAnnotation($params);
 		}
@@ -387,6 +391,11 @@ class OssnAnnotation extends OssnEntities {
 				if(!$options['order_by']) {
 						$params['order_by'] = "a.id ASC";
 				}
+        
+        
+        /*added PostgreSQL fork */
+        
+        $params['group_by'] = 'a.id, a.time_created, a.owner_guid, a.subject_guid, a.type, emd.value';
 				
 				$this->get = $this->select($params, true);
 				
