@@ -40,7 +40,7 @@ class OssnLikes extends OssnDatabase {
 						}
 				}
 				if(!$this->isLiked($subject_id, $guid, $type)) {
-						$this->statement("INSERT INTO ossn_likes (`subject_id`, `guid`, `type`)
+						$this->statement("INSERT INTO ossn_likes (subject_id, guid, type)
 					           VALUES('{$subject_id}', '{$guid}', '{$type}');");
 						if($this->execute()) {
 								$params['subject_guid'] = $subject_id;
