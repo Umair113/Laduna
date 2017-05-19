@@ -305,6 +305,8 @@ class OssnWall extends OssnObject {
 						
             /* added PostgreSQL fork */
             
+            $params['group_by'] = 'o.guid';
+            
 						$default = array(
 								'type' => 'user',
 								'subtype' => 'wall',
