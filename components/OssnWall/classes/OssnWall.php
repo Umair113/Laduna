@@ -254,7 +254,11 @@ class OssnWall extends OssnObject {
 						$friend_guids[] = $user->guid;
 						$friend_guids   = implode(',', $friend_guids);
 						
+          
             /* added PostgreSQL fork */
+            
+            $params['group_by'] = 'o.guid';
+            
             
 						$default = array(
 								'type' => 'user',
