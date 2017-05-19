@@ -18,7 +18,7 @@ class OssnDatabase extends OssnBase {
 		public function Connect() {
 				$settings = ossn_database_settings();
 /*				$connect  = new mysqli($settings->host, $settings->user, $settings->password, $settings->database, $settings->port);*/
-
+/*
         $xhost = "host=".$settings->host;
         $xport = "port=".$settings->port;
         $xdbname = "dbname=".$settings->database;
@@ -26,6 +26,10 @@ class OssnDatabase extends OssnBase {
         $xpassword = "password=".$settings->password;
 
         $connect = pg_connect("$xhost $xport $xdbname $xuser $xpassword");
+*/
+
+        $connect = pg_connect("host=$settings->host port=$settings->port dbname=$settings->database user=$settings->user password=$settings->password");
+
         
         
 /*        if(!$connect->connect_errno) {
@@ -103,7 +107,12 @@ class OssnDatabase extends OssnBase {
             	$this->exe = $this->database->query($this->query);            
             */            
 						$this->exe = pg_query($this->database,$this->query);
-            
+ 
+    /*    error_log($this->query);*/
+if (preg_match('/ossn_users/',$this->query))
+{
+error_log($this->query);
+}
 						$exception = ossn_call_hook('database', 'execution:message', false, true);
 						if(!$this->exe && $exception) {
             
@@ -121,7 +130,7 @@ class OssnDatabase extends OssnBase {
             {
                 $insert_query = pg_query($this->database,"SELECT lastval();");
                 $insert_row = pg_fetch_row($insert_query);
-                $this->last_id = $insert_row[0];
+                $this->last_id = (int)$insert_row[0];
 								
 						}
             
