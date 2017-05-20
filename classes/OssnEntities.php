@@ -459,10 +459,15 @@ class OssnEntities extends OssnDatabase {
 				);
 				$params['order_by'] = $options['order_by'];
 				$params['limit']    = $options['limit'];
-				
+		
+    
+      
+    		
 				if(!$options['order_by']) {
 						$params['order_by'] = "e.guid ASC";
 				}
+    
+                
 				$this->get = $this->select($params, true);
 				
 				//prepare count data;
@@ -475,8 +480,17 @@ class OssnEntities extends OssnDatabase {
 						);
             
             /* added PostgreSQL fork */
+      
             
-            $params['group_by'] = $options['group_by'];
+        if ($options['group_by'] == 'e.guid'){            
+            /*$params['group_by'] = $options['group_by'];*/
+            
+            $params['group_by'] = false;
+            $params['order_by'] = false;
+            
+            }
+            
+            
             
 						$count           = array_merge($params, $count);
 						return $this->select($count)->total;

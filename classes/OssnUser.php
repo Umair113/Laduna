@@ -944,12 +944,15 @@ class OssnUser extends OssnEntities {
 				$wheres[] = "time_created > 0";
 				
 				$params['from']     = "ossn_users";
+        
+        /* added PostgreSQL fork */
+        
 				$params['params']   = array(
 						"to_char(to_timestamp(time_created), 'YYYY') AS year",
 						"to_char(to_timestamp(time_created) , 'MM') AS month",
 						"COUNT(guid) AS total"
 				);
-				$params['group_by'] = "to_char(to_timestamp(time_created) ,  'YYYY'), to_char(to_timestamp(time_created) , 'MM')";
+				$params['group_by'] = "to_char(to_timestamp(time_created) ,  'YYYY'), to_char(to_timestamp(time_created) ,  'MM')";
 				$params["wheres"]   = array(
 						$this->constructWheres($wheres)
 				);
@@ -990,7 +993,9 @@ class OssnUser extends OssnEntities {
 				$params['count']       = true;
 				$params['value']       = $gender;
         
+        
         /* added PostgreSQL fork */
+        
         
         
         $params['group_by']  = 'e.guid';
