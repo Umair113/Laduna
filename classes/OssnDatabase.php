@@ -287,7 +287,7 @@ error_log($this->query);
 						if(empty($params['wheres'])) {
 								return false;
 						}
-						$query = "DELETE FROM `{$params['from']}` {$wheres};";
+						$query = "DELETE FROM {$params['from']} {$wheres};";
 						$this->statement($query);
 						if($this->execute()) {
 								return true;
